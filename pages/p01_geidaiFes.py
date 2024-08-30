@@ -14,6 +14,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument('--disable-gpu')
 driver = webdriver.Chrome(service=Service(), options=chrome_options)
 driver.get('https://tiget.net/users/1207563')
+time.sleep(4)
 
 history = np.zeros((0,4))
 my_bar = st.progress(0)
@@ -22,8 +23,8 @@ for i in range(30 ,97):
     my_bar.progress((i-29)/68, text="Operation in progress. Please wait.")
     if len(driver.find_elements(By.XPATH, f'/html/body/div[2]/div[2]/div/div[4]/div/div[2]/div[2]/div/div[{i}]/div/div[1]/a'))>0:
         driver.find_element(By.XPATH, f'/html/body/div[2]/div[2]/div/div[4]/div/div[2]/div[2]/div/div[{i}]/div/div[1]/a').click()
-        driver.switch_to.window(driver.window_handles[-1])
         time.sleep(1)
+        driver.switch_to.window(driver.window_handles[-1])
         item = np.array([
             driver.find_element(By.XPATH, '/html/body/div[2]/div[4]/article/div/header/h1').text,
             driver.find_element(By.XPATH, '/html/body/div[2]/div[4]/article/div/div[2]/div[1]/div/div[1]/div[1]/div[1]').text,
